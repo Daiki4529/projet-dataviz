@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import AttackDetailModal from './AttackDetailModal';
+import countriesJson from './countries.json';
 
 // Utility to get cached country centroids
 function getCountryCentroid(countryName, countries) {
@@ -46,10 +47,7 @@ function CyberAttackMap({ data }) {
 
   // Load countries data once
   useEffect(() => {
-    fetch('./src/countries.json')
-      .then((response) => response.json())
-      .then(setCountries)
-      .catch((error) => console.error('Error loading countries data:', error));
+    setCountries(countriesJson);
   }, []);
 
   // Load world GeoJSON

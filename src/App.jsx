@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CyberAttackMap from './CyberAttackMap';
-import * as d3 from 'd3';
+import { useEffect, useState } from 'react';
+import cyberAttackDetectionJson from './Cyberattacks Detection.json';
 
 function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    d3.csv('./src/Cyberattacks Detection.csv').then(csvData => {
-      setData(csvData);
-    });
+    // Assumes 'cyberattacks.csv' is in your public folder
+    setData(cyberAttackDetectionJson);
   }, []);
 
   return (
     <div className="App">
       <h1>Cyber Attack Flux Map</h1>
-      <div className="main-content">
-        <div className="map-container">
-          <CyberAttackMap data={data} />
-        </div>
-        <div className="sidebar">
-          {/* Place filter components here if not already in CyberAttackMap */}
-          {/* If filters are part of CyberAttackMap, they can be styled with the .sidebar class */}
-        </div>
-      </div>
+      <CyberAttackMap data={data} />
     </div>
   );
 }
